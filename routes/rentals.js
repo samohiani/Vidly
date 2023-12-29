@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
-Fawn.init(mongoose);
+Fawn.init('mongodb://localhost/vidly');     
 
 router.get('/', async (req,res) => {
     const rentals = await Rental.find().sort('-dateOut');
@@ -34,7 +34,7 @@ router.post('/', async (req, res) =>{
         movie: {
             _id: movie._id,
             title: movie.title,
-            dailyRentalRatw: movie.dailyRentalRate
+            dailyRentalRate: movie.dailyRentalRate
         }
     });
 
@@ -46,7 +46,7 @@ router.post('/', async (req, res) =>{
             })
             .run()
 
-    res.send(rental);
+        res.send(rental);
     }
     catch(ex) {
         res.status(500).send('Something failed.');
@@ -60,3 +60,5 @@ router.get('/:id', async (req, res) => {
 
     res.send(rental);
 });
+
+module.exports = router;
