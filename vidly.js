@@ -8,7 +8,7 @@ const express = require('express');
 const app = express();
 
 require('./startup/routes')(app);
-require('./startup/database')(app);
+require('./startup/db')();
 
 winston.handleExceptions(
     new winston.transports.File({ filename: 'uncaughtExceptions.log' }));
